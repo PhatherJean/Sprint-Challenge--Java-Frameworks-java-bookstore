@@ -1,5 +1,6 @@
 package com.lambdaschool.bookstore.services;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lambdaschool.bookstore.BookstoreApplicationTest;
 import com.lambdaschool.bookstore.exceptions.ResourceNotFoundException;
 import com.lambdaschool.bookstore.models.Author;
@@ -18,8 +19,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import static junit.framework.TestCase.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static junit.framework.TestCase.assertEquals;
 
@@ -115,35 +120,112 @@ public class BookServiceImplUnitTestNoDB
     @Test
     public void findAll()
     {
+        Mockito.when(bookrepos.findAll())
+                .thenReturn(myBookList);
+        System.out.println(bookService.findAll());
+        assertEquals(5, bookService.findAll().size());
     }
 
     @Test
     public void findBookById()
     {
+        Mockito.when(bookrepos.findById(2L))
+                .thenReturn(Optional.of(myBookList.get(0)));
+
+        assertEquals("Flatterland",
+                bookService.findBookById(2)
+        .getTitle());
+
     }
 
     @Test(expected = ResourceNotFoundException.class)
     public void notFindBookById()
     {
+        Mockito.when(bookrepos.findById(1005L))
+                .thenThrow(ResourceNotFoundException.class);
+
+        assertEquals("Digital Fortess",
+                bookService.findBookById(1005L).getTitle());
     }
 
     @Test
     public void delete()
     {
+        Mockito.when(bookrepos.findById(5L))
+                .thenReturn(Optional.of(myBookList.get(0)));
+
+        Mockito.doNothing()
+                .when(bookrepos)
+                .deleteById(5L);
+
+        bookService.delete(5);
+        assertEquals(5,myBookList.size());
     }
 
     @Test
     public void save()
     {
+        String book6Title = "Just My Luck";
+        Section s6 = new Section("Biography");
+        s6.setSectionid(6);
+        Author a7 = new Author("Patrice",
+                "Jean");
+        a7.setAuthorid(7);
+
+        Book b6 = new Book(book6Title,
+                "9485rand9485om324",
+                500,
+                s6);
+
+        b6.getWrotes()
+                .add(new Wrote(a7, b6));
+        myBookList.add(b6);
     }
 
     @Test
     public void update()
+            throws Exception
     {
+        String book6Title = "Just My Luck Day";
+        Section s2 = new Section("Biography");
+        s2.setSectionid(2);
+        Author a7 = new Author("Patrick",
+                "Swayzee");
+        a7.setAuthorid(7);
+
+        Book b6 = new Book(book6Title,
+                "9485rand9485om324",
+                50,
+                s2);
+        b6.getWrotes()
+                .add(new Wrote(a7, b6));
+
+        ObjectMapper objmap = new ObjectMapper();
+        Book b7 = objmap
+                .readValue(objmap.writeValueAsString(b6),
+                        Book.class);
+
+        Mockito.when(bookrepos.findById(6L))
+                .thenReturn(Optional.of(b7));
+
+        Mockito.when(bookrepos.save(any(Book.class)))
+                .thenReturn(b6);
+
+        Book addBook = bookService.update(b6, 6);
+
+        assertNotNull(addBook);
+        assertEquals(book6Title, addBook.getTitle());
     }
 
     @Test
     public void deleteAll()
     {
+        Mockito.when(bookrepos.findAll())
+                .thenReturn(myBookList);
+
+        Mockito.doNothing().when(bookrepos).deleteAll();
+
+        bookService.deleteAll();
+        assertEquals(0, myBookList.size());
     }
 }

@@ -1,6 +1,7 @@
 package com.lambdaschool.bookstore.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
@@ -52,6 +53,20 @@ public class ResourceServerConfig
                              "/webjars/**",
                              "/createnewuser")
                 .permitAll()
+                .antMatchers(
+                        HttpMethod.GET,
+                        "/books/**")
+                .hasAnyRole("ADMIN", "USER", "DATA")
+                .antMatchers(
+                        HttpMethod.POST,
+                        "/books/**")
+                .hasAnyRole("ADMIN")
+                .antMatchers(HttpMethod.PUT,
+                        "/books/**")
+                .hasAnyRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE,
+                        "/books/**")
+                .hasAnyRole("ADMIN")
                 .antMatchers("/users/**",
                              "/useremails/**",
                              "/oauth/revoke-token",
