@@ -12,7 +12,7 @@ _You have **three hours** to complete this challenge. Plan your time accordingly
 
 ## Introduction
 
-This is a basic bookstore database scheme with books that have authors. Books may have many authors and many authors may have written many books. The relationship between books and authors is called `wrote`. Each book can be found in only one section of the bookstore. 
+This is a basic bookstore database scheme with books that have authors. Books may have many authors and many authors may have written many books. The relationship between books and authors is called `wrote`. Each book can be found in only one section of the bookstore.
 
 ### Commits
 
@@ -23,20 +23,27 @@ Commit your code regularly and meaningfully. This helps both you (in case you ev
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics.
 
 1. Explain exception handling in your application.
+   ✨ Exception handling- When a issue arise instead of crashing the application it instead throws an exception and continue with normal application process.
+
 2. Explain your user authentication flow.
+   ✨ From top to bottom it get less and less strict since things an admin can do should not be avail to just any user
+
 3. Explain your unit tests, including how they work and why they are important.
+   ✨ Unit test checks just on line or section of code to see if it does what it is suppose to do with or without anything passed in.
+
 4. Explain how you deployed your application to a cloud service with a persistent database.
+   ✨ With the use of table we are able to keep data consistantly stable and able to recover.
 
 ## Instructions
 
 ### Task 1: Project Set Up
 
-- [ ] Create a forked copy of this project
-- [ ] Clone your OWN version of the repository (Not Lambda's by mistake!)
-- [ ] Create a new branch: git checkout -b `<firstName-lastName>`.
-- [ ] Start with the provided bookstore application.
-- [ ] Push commits: `git push -u origin <firstName-lastName>`
-- [ ] Implement the project on your newly created `<firstName-lastName>` branch, committing changes regularly
+- [x] Create a forked copy of this project
+- [x] Clone your OWN version of the repository (Not Lambda's by mistake!)
+- [x] Create a new branch: git checkout -b `<firstName-lastName>`.
+- [x] Start with the provided bookstore application.
+- [x] Push commits: `git push -u origin <firstName-lastName>`
+- [x] Implement the project on your newly created `<firstName-lastName>` branch, committing changes regularly
 
 #### Video on How to Set Up Your Project
 
@@ -44,9 +51,9 @@ Be prepared to demonstrate your understanding of this week's concepts by answeri
 
 ### Task 2: Project Requirements
 
-- [ ] You will be creating a REST api service to store and read data from a database. You should be able to switch between an H2 database and a PostgreSQL database by using an application.properties setting.
+- [x] You will be creating a REST api service to store and read data from a database. You should be able to switch between an H2 database and a PostgreSQL database by using an application.properties setting.
 
-- [ ] Please fork and clone this repository. This repository does have a starter project. The provided initial application has the basics in place. Note that if you start with the initial project, all the following are done for you!!!
+- [x] Please fork and clone this repository. This repository does have a starter project. The provided initial application has the basics in place. Note that if you start with the initial project, all the following are done for you!!!
 
 - Auditing fields
 - Exception Handling
@@ -60,44 +67,47 @@ Be prepared to demonstrate your understanding of this week's concepts by answeri
 - Swagger
 - Unit / Integration testing (at least the POM file entries and general structure)
 - The database is already modeled for you
-- [ ] Do NOT change or delete entries in the POM.XML - Dependencies, plugins, etc. may be added as needed
+- [x] Do NOT change or delete entries in the POM.XML - Dependencies, plugins, etc. may be added as needed
 
 ![Bookstore Database](bookstoredb.png)
 
 - **You are tasked to do the following**
 
-- [ ] Currently, Books are not addressed in security so those routes cannot be accessed. Setup security so that the following access is available:
-  - [ ] GET /books/books - any user with the role ADMIN, USER, or DATA can access
-  - [ ] GET /books/book/{id} - any user with role ADMIN, USER, or DATA can access
-  - [ ] POST /books/book - any user with role ADMIN can access
-  - [ ] PUT /books/book/{id} - any user with role ADMIN can access
-  - [ ] DELETE /books/book/{id} - any user with role ADMIN can access
+- [x] Currently, Books are not addressed in security so those routes cannot be accessed. Setup security so that the following access is available:
 
-- [ ] When a client tries searching for or updating a book that does not exist, a generic exception is sent back to the client. Change this so our custom exception `ResourceNotFoundException` is returned instead.
+  - [x] GET /books/books - any user with the role ADMIN, USER, or DATA can access
+  - [x] GET /books/book/{id} - any user with role ADMIN, USER, or DATA can access
+  - [x] POST /books/book - any user with role ADMIN can access
+  - [x] PUT /books/book/{id} - any user with role ADMIN can access
+  - [x] DELETE /books/book/{id} - any user with role ADMIN can access
 
-- [ ] Add unit test for the Book Service without using the database as test data. The structure is already in place, you need to write the tests for the following:
-  - [ ] findAll
-  - [ ] findBookById that succeeds
-  - [ ] findBookById that fails
-  - [ ] delete
-  - [ ] save a new book
+- [x] When a client tries searching for or updating a book that does not exist, a generic exception is sent back to the client. Change this so our custom exception `ResourceNotFoundException` is returned instead.
 
-- [ ] Add unit tests for the Book Controller NOT relying on the database as test data. The structure is already in place, you need to set up the data and write the tests for the following:
-  - [ ] listAllBooks
-  - [ ] getBookById that succeeds
-  - [ ] getBookById that fails
-  - [ ] addNewBook
-  - [ ] deleteBookById
+- [x] Add unit test for the Book Service without using the database as test data. The structure is already in place, you need to write the tests for the following:
 
-- [ ] And now that we have a good system, deploy the system to Heroku using PostgreSQL. Your application should be switchable between H2 and PostgreSQL through setting a variable in application.properties
+  - [x] findAll
+  - [x] findBookById that succeeds
+  - [x] findBookById that fails
+  - [x] delete
+  - [x] save a new book
+
+- [x] Add unit tests for the Book Controller NOT relying on the database as test data. The structure is already in place, you need to set up the data and write the tests for the following:
+
+  - [x] listAllBooks
+  - [x] getBookById that succeeds
+  - [x] getBookById that fails
+  - [x] addNewBook
+  - [x] deleteBookById
+
+- [x] And now that we have a good system, deploy the system to Heroku using PostgreSQL. Your application should be switchable between H2 and PostgreSQL through setting a variable in application.properties
 
 ### Required best practices
 
-- [ ] Consistent naming. Examples: variables, functions, Components, and file/folder organization.
-- [ ] Consistent spacing. Examples: line breaks, around arguments and before/after functions.
-- [ ] Consistent quotation usage.
-- [ ] Spell-check.
-- [ ] Schedule time to review, refine and reassess your work.
+- [x] Consistent naming. Examples: variables, functions, Components, and file/folder organization.
+- [x] Consistent spacing. Examples: line breaks, around arguments and before/after functions.
+- [x] Consistent quotation usage.
+- [x] Spell-check.
+- [x] Schedule time to review, refine and reassess your work.
 
 It is better to submit a challenge that meets [MVP](https://en.wikipedia.org/wiki/Minimum_viable_product) than one that attempts too much and fails.
 
@@ -115,13 +125,14 @@ In your solution, it is essential that you follow best practices and produce cle
 
 Follow these steps for completing your project.
 
-- [ ] Set up your fork on Github to submit via Codegrade, pushing commits to your <firstName-lastName> branch.
+- [x] Set up your fork on Github to submit via Codegrade, pushing commits to your <firstName-lastName> branch.
 
 ## A summary of requirements
 
 ### MVP
 
 - Implement Security For the routes
+
   - GET /books/books
   - GET /books/book/{id}
   - POST /books/book
@@ -131,6 +142,7 @@ Follow these steps for completing your project.
 - Testing the methods
 
   - Book Service:
+
     - findAll
     - findBookById that succeeds
     - findBookById that fails
